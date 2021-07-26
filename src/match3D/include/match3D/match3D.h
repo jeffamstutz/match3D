@@ -1,0 +1,11 @@
+// Copyright 2021 Jefferson Amstutz
+// SPDX-License-Identifier: Apache-2.0
+
+#pragma once
+
+#include "detail/Application.h"
+// imgui
+#define IMGUI_DISABLE_INCLUDE_IMCONFIG_H
+#include <imgui.h>
+// glfw
+#include <GLFW/glfw3.h>

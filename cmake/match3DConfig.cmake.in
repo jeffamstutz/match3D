@@ -1,0 +1,17 @@
+## Copyright 2021 Jefferson Amstutz
+## SPDX-License-Identifier: Apache-2.0
+
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+
+set(OpenGL_GL_PREFERENCE "LEGACY")
+find_dependency(OpenGL 2)
+find_dependency(glfw3)
+
+include("${CMAKE_CURRENT_LIST_DIR}/@PROJECT_NAME@_imgui_Exports.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/@PROJECT_NAME@_Exports.cmake")
+
+check_required_components("@PROJECT_NAME@")
+
+set(MATCH3D_FOUND TRUE)
