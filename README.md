@@ -9,7 +9,7 @@ applications with a UI.
 ### Requirements
 
 - CMake
-- C++17 compiler
+- C++11 compiler
 - GLFW
 
 `match3D` is developed and tested on Linux, but has nothing inherently platform
