@@ -3,9 +3,12 @@
 
 #pragma once
 
-#include "detail/Application.h"
+// glad
+#include "detail/glad/glad.h"
 // imgui
 #define IMGUI_DISABLE_INCLUDE_IMCONFIG_H
 #include <imgui.h>
 // glfw
 #include <GLFW/glfw3.h>
+// match3D
+#include "detail/Application.h"

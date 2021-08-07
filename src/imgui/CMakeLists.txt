@@ -11,10 +11,10 @@ match3d_fetch_project(
 
 set(OpenGL_GL_PREFERENCE "LEGACY")
 if (MATCH3D_SRC_CONFIG_MODE)
-  find_dependency(OpenGL 2)
+  find_dependency(OpenGL 4)
   find_dependency(glfw3)
 else()
-  find_package(OpenGL 2 REQUIRED)
+  find_package(OpenGL 4 REQUIRED)
   find_package(glfw3 REQUIRED)
 endif()
 

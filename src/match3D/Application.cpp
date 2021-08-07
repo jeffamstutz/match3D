@@ -2,6 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #include "match3D/detail/Application.h"
+// glad
+#include "match3D/detail/glad/glad.h"
 // glfw
 #include <GLFW/glfw3.h>
 // imgui
@@ -22,8 +24,9 @@ static void glfw_error_callback(int error, const char *description)
 struct AppImpl
 {
   GLFWwindow *window{nullptr};
-  size_t width;
-  size_t height;
+  int width{0};
+  int height{0};
+  bool windowResized{true};
   std::string name;
 
   void init();
@@ -36,7 +39,7 @@ Application::Application()
   glfwSetErrorCallback(glfw_error_callback);
 }
 
-void Application::run(size_t width, size_t height, const char *name)
+void Application::run(int width, int height, const char *name)
 {
   m_impl->width = width;
   m_impl->height = height;
@@ -47,6 +50,13 @@ void Application::run(size_t width, size_t height, const char *name)
   mainLoop();
   teardown();
   m_impl->cleanup();
+}
+
+bool Application::getWindowSize(int &width, int &height) const
+{
+  width = m_impl->width;
+  height = m_impl->height;
+  return m_impl->windowResized;
 }
 
 void Application::mainLoop()
@@ -72,6 +82,7 @@ void Application::mainLoop()
     ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
 
     glfwSwapBuffers(window);
+    m_impl->windowResized = false;
   }
 }
 
@@ -80,19 +91,35 @@ void AppImpl::init()
   if (!glfwInit())
     throw std::runtime_error("failed to initialize GLFW");
 
-  window = glfwCreateWindow(width, height, name.c_str(), nullptr, nullptr);
+  glfwWindowHint(GLFW_SRGB_CAPABLE, GLFW_TRUE);
 
+  window = glfwCreateWindow(width, height, name.c_str(), nullptr, nullptr);
   if (window == nullptr)
     throw std::runtime_error("failed to create GLFW window");
 
+  glfwSetWindowUserPointer(window, this);
+
   glfwMakeContextCurrent(window);
   glfwSwapInterval(1);
+
+  if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+    glfwTerminate();
+    throw std::runtime_error("Failed to load GL");
+  }
 
   ImGui::CreateContext();
   ImGui::StyleColorsDark();
 
   ImGui_ImplGlfw_InitForOpenGL(window, true);
   ImGui_ImplOpenGL2_Init();
+
+  glfwSetFramebufferSizeCallback(
+      window, [](GLFWwindow *w, int newWidth, int newHeight) {
+        auto *app = (AppImpl *)glfwGetWindowUserPointer(w);
+        app->width = newWidth;
+        app->height = newHeight;
+        app->windowResized = true;
+      });
 }
 
 void AppImpl::cleanup()

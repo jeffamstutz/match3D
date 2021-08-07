@@ -3,7 +3,6 @@
 
 #pragma once
 // std
-#include <stddef.h>
 #include <memory>
 #include <string_view>
 
@@ -22,7 +21,10 @@ class Application
   virtual void drawBackground() = 0;
   virtual void teardown() = 0;
 
-  void run(size_t width, size_t height, const char *name);
+  void run(int width, int height, const char *name);
+
+ protected:
+  bool getWindowSize(int &width, int &height) const;
 
  private:
   void mainLoop();

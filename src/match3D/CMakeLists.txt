@@ -3,7 +3,7 @@
 
 add_library(${PROJECT_NAME} ${MATCH3D_LIB_TYPE} Application.cpp)
 target_sources(${PROJECT_NAME} ${MATCH3D_SOURCES_MODE} Application.cpp)
-target_link_libraries(${PROJECT_NAME} ${MATCH3D_LINK_MODE} imgui_glfw)
+target_link_libraries(${PROJECT_NAME} ${MATCH3D_LINK_MODE} imgui_glfw glad)
 target_include_directories(${PROJECT_NAME}
 ${MATCH3D_LINK_MODE}
   $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>

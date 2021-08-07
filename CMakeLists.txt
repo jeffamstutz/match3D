@@ -1,5 +1,5 @@
-## Copyright 2020 Jefferson Amstutz
-## SPDX-License-Identifier: Unlicense
+## Copyright 2021 Jefferson Amstutz
+## SPDX-License-Identifier: Apache-2.0
 
 cmake_minimum_required(VERSION 3.14)
 
@@ -29,6 +29,7 @@ include(GNUInstallDirs)
 option(BUILD_SHARED_LIBS "Build match3D as a shared library?" OFF)
 
 subdirs(
+  src/glad
   src/imgui
   src/stb_image
   src/match3D

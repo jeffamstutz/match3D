@@ -19,6 +19,7 @@ function(match3D_build_targets)
   include(${CMAKE_CURRENT_LIST_DIR}/macros.cmake)
 
   subdirs(
+    ${CMAKE_CURRENT_LIST_DIR}/../src/glad
     ${CMAKE_CURRENT_LIST_DIR}/../src/imgui
     ${CMAKE_CURRENT_LIST_DIR}/../src/match3D
   )
