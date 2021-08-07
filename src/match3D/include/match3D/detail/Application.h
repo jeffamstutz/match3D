@@ -6,7 +6,7 @@
 #include <memory>
 #include <string_view>
 
-namespace match {
+namespace match3D {
 
 struct AppImpl;
 
@@ -32,4 +32,4 @@ class Application
   std::shared_ptr<AppImpl> m_impl{nullptr};
 };
 
-} // namespace match
+} // namespace match3D

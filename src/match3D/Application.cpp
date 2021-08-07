@@ -14,7 +14,7 @@
 #include <cstdio>
 #include <stdexcept>
 
-namespace match {
+namespace match3D {
 
 static void glfw_error_callback(int error, const char *description)
 {
@@ -135,4 +135,4 @@ void AppImpl::cleanup()
   window = nullptr;
 }
 
-} // namespace match
+} // namespace match3D
