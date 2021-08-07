@@ -82,11 +82,16 @@ Each of the above methods are pure-virtual (`=0`) so that each customization
 point is always visible in an implementation. The [provided
 example](example/main.cpp) shows a minimal demonstration of an application.
 
-NOTE: all mouse and keyboard I/O is to be done through Dear ImGui. The example
-deomonstrates this.
+NOTE: all mouse and keyboard I/O is to be done through Dear ImGui -- see example
+app to see it in action.
 
-Applications then must create a simple `main()` function to instantiate and
-run the application. This looks something like:
+Window resize events are queried on each call to `buildUI()` via the protected
+method `bool Application::getWindowSize(int &width, int &height)`. The method
+always writes the width/height as out parameters and returns `true` if the
+window has been resized since the last frame.
+
+Finally, applications must create a simple `main()` function to instantiate and
+run the application. This may look something like:
 
 ```c++
 int main()
