@@ -20,7 +20,8 @@ endif()
 
 add_library(${PROJECT_NAME} INTERFACE)
 
-target_sources(${PROJECT_NAME} INTERFACE
+target_sources(${PROJECT_NAME}
+INTERFACE
   $<BUILD_INTERFACE:${match3D_imgui_src_LOCATION}/imgui.cpp>
   $<BUILD_INTERFACE:${match3D_imgui_src_LOCATION}/imgui_draw.cpp>
   $<BUILD_INTERFACE:${match3D_imgui_src_LOCATION}/imgui_demo.cpp>

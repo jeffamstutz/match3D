@@ -3,7 +3,7 @@
 
 #include "match3D/match3D.h"
 
-class ExampleApp : public match::Application
+class ExampleApp : public match3D::Application
 {
  public:
   ExampleApp() = default;
