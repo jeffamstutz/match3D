@@ -3,7 +3,7 @@
 
 project(imgui_glfw VERSION ${PROJECT_VERSION} LANGUAGES CXX)
 
-match3d_fetch_project(
+match3D_fetch_project(
   NAME match3D_imgui_src
   URL https://github.com/ocornut/imgui/archive/refs/tags/v1.82.zip
   DESTINATION match3D_imgui

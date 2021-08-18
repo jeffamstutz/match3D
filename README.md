@@ -42,6 +42,23 @@ found in your environment in order to succeed in finding match3D itself.
 Downstream targets which link against `match3D::match3D` have everything
 directly built into it.
 
+### Using additional components
+
+match3D can optionally bring in additional header-only libraries: currently
+`stb_image` and `glm`. These are optionally added to the build by passing them
+to `find_package` as components. For example, the following will also fetch
+`glm` when constructing the match3D targets:
+
+```cmake
+find_package(match3D REQUIRED COMPONENTS glm)
+```
+
+Which then lets you include `glm` normally in your app:
+
+```cpp
+#include <glm/glm.hpp>
+```
+
 # Using the library to create an application
 
 The match3D library revoles around a single C++ base class: `Application`.

@@ -2,6 +2,13 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #include "match3D/match3D.h"
+// NOTE: Also can include glm and stb_image because they were passed as CMake
+//       components. If those were omitted in CMake, then only match3D/match3D.h
+//       can be included.
+#include "glm/glm.hpp"
+#include "stb_image.h"
+#include "stb_image_resize.h"
+#include "stb_image_write.h"
 
 class ExampleApp : public match3D::Application
 {
