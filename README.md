@@ -12,19 +12,21 @@ applications with a UI.
 - C++11 compiler
 - GLFW
 
-`match3D` is developed and tested on Linux, but has nothing inherently platform
-specific in it. If you try it on `macOS` or `Windows` and find a problem, let
+match3D is developed and tested on Linux, but has nothing inherently platform
+specific in it. If you try it on macOS or Windows and find a problem, let
 me know!
 
-# Building against match3D
+# Building with match3D
 
-There are 2 methods for using match3D as a library, either as a source library
-or as a pre-compiled binary library. Either method is easiest to use with CMake
-via the provided package config. The provided example (found in
-[example/external](example/external)) can be built with either method.
+The match3D library is consumed as a source library. This is easiest to do
+using CMake via the provided package config. The provided example (found in
+[example/external](example/external)) is built like an external consumer of the
+library.
 
-With either method, the consuming CMake is very straightforward and will look
-something like:
+The library is found by pointing your project's build to a local copy of the
+`match3D` source with either `match3D_DIR` variable or appending it to
+`CMAKE_PREFIX_PATH`. Then the consuming CMake is very straightforward and will
+look something like:
 
 ```cmake
 find_package(match3D REQUIRED)
@@ -32,43 +34,17 @@ add_executable(myApplication)
 target_link_libraries(myApplication PRIVATE match3D::match3D)
 ```
 
-The `match3D::match3D` target is all that is needed to bring in the necessary
-includes and linked libraries to build your application, including GLFW and
-Dear Imgui. Note that `find_package(match3D)` will require GLFW to be found in
-your environment in order to succeed finding `match3D`.
+Linking with the `match3D::match3D` target is all that is needed to bring in the
+necessary includes and linked libraries to build your application, including
+GLFW and Dear Imgui. Note that `find_package(match3D)` will require GLFW to be
+found in your environment in order to succeed in finding match3D itself.
 
-## Usage as a source library
-
-The first method of using `match3D` is treating a source tree as a CMake
-package.  This is done by pointing CMake to a local copy of the `match3D` source
-with either `match3D_DIR` variable or appending it to `CMAKE_PREFIX_PATH`.
-
-This method creates `match3D::match3D` as an INTERFACE target, carrying with it
-include paths and `.cpp` sources for the match3D library itself and ImGui.
 Downstream targets which link against `match3D::match3D` have everything
 directly built into it.
 
-## Usage as a pre-compiled library
+# Using the library to create an application
 
-The second method of using `match3D` is a more traditional pre-built CMake
-package.  This is done by first building `match3D` in a local build directory,
-then installing it (destination specified with `CMAKE_INSTALL_PREFIX`). This
-might look something like (installed to `~/opt/match3D`):
-
-```
-% mkdir build
-% cd build
-% cmake -DCMAKE_INSTALL_PREFIX=~/opt/match3D /path/to/match3D/source
-% cmake --build . --target install
-```
-
-Then downstream consumers would then point their CMake build to the location
-that `match3D` was installed, with either `match3D_DIR` directly or appending
-`CMAKE_PREFIX_PATH` (above example would use "`~/opt/match3D`").
-
-# Creating an application
-
-The `match3D` library revoles around a single C++ base class: `Application`.
+The match3D library revoles around a single C++ base class: `Application`.
 This class has applications override methods to inject functionality for
 creating the UI and drawing objects (with OpenGL) each frame. Specifically,
 applications must override:
