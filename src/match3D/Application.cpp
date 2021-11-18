@@ -11,6 +11,7 @@
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl2.h"
 // std
+#include <chrono>
 #include <cstdio>
 #include <stdexcept>
 
@@ -28,6 +29,9 @@ struct AppImpl
   int height{0};
   bool windowResized{true};
   std::string name;
+
+  std::chrono::time_point<std::chrono::steady_clock> frameEndTime;
+  std::chrono::time_point<std::chrono::steady_clock> frameStartTime;
 
   void init();
   void cleanup();
@@ -59,11 +63,19 @@ bool Application::getWindowSize(int &width, int &height) const
   return m_impl->windowResized;
 }
 
+float Application::getLastFrameLatency() const
+{
+  auto diff = m_impl->frameEndTime - m_impl->frameStartTime;
+  return std::chrono::duration<float>(diff).count();
+}
+
 void Application::mainLoop()
 {
   auto window = m_impl->window;
 
   while (!glfwWindowShouldClose(window)) {
+    m_impl->frameStartTime = m_impl->frameEndTime;
+    m_impl->frameEndTime = std::chrono::steady_clock::now();
     glfwPollEvents();
 
     ImGui_ImplOpenGL2_NewFrame();

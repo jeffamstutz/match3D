@@ -25,6 +25,7 @@ class Application
 
  protected:
   bool getWindowSize(int &width, int &height) const;
+  float getLastFrameLatency() const;
 
  private:
   void mainLoop();

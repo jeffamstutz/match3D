@@ -37,6 +37,7 @@ class ExampleApp : public match3D::Application
       ImGui::Begin("Debug Info", nullptr, windowFlags);
 
       ImGuiIO &io = ImGui::GetIO();
+      ImGui::Text("display rate: %.1f FPS", 1.f / getLastFrameLatency());
       ImGui::Text("mouse pos: %f, %f", io.MousePos.x, io.MousePos.y);
       ImGui::NewLine();
 
