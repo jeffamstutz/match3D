@@ -10,15 +10,27 @@ endif()
 include(FetchContent)
 
 function(match3D_fetch_project)
-  cmake_parse_arguments(FETCH_SOURCE "" "NAME;URL;MD5;DESTINATION" "" ${ARGN})
+  cmake_parse_arguments(FETCH_SOURCE
+    ""                         # options
+    "NAME;URL;MD5;DESTINATION" # single-arg options
+    ""                         # multi-arg options
+    ${ARGN}
+  )
 
   if (FETCH_SOURCE_MD5)
     set(FETCH_SOURCE_MD5_COMMAND URL_MD5 ${FETCH_SOURCE_MD5})
   endif()
 
+  if (match3D_CACHE_IN_SOURCE_TREE)
+    set(FETCH_SOURCE_CACHE_COMMAND
+      DOWNLOAD_DIR ${CMAKE_SOURCE_DIR}/.match3D/${FETCH_SOURCE_NAME}
+    )
+  endif()
+
   FetchContent_Populate(${FETCH_SOURCE_NAME}
     URL ${FETCH_SOURCE_URL}
     ${FETCH_SOURCE_MD5_COMMAND}
+    ${FETCH_SOURCE_CACHE_COMMAND}
     SOURCE_DIR ${CMAKE_BINARY_DIR}/${FETCH_SOURCE_DESTINATION}
   )
 

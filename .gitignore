@@ -2,3 +2,4 @@ _*/
 *vscode*
 build/
 cmake-build-*
+.match3D
