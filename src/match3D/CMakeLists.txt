@@ -2,7 +2,11 @@
 ## SPDX-License-Identifier: Apache-2.0
 
 add_library(${PROJECT_NAME} INTERFACE)
-target_sources(${PROJECT_NAME} INTERFACE SimpleApplication.cpp)
+target_sources(${PROJECT_NAME} INTERFACE
+  SimpleApplication.cpp
+  DockingApplication.cpp
+  Window.cpp
+)
 target_link_libraries(${PROJECT_NAME} INTERFACE imgui_glfw glad)
 target_include_directories(${PROJECT_NAME}
 INTERFACE
