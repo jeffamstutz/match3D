@@ -18,4 +18,4 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
 project(match3D VERSION 0.5.0 LANGUAGES C CXX)
 
-add_subdirectory(example)
+add_subdirectory(examples)
