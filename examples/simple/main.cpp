@@ -10,7 +10,7 @@
 #include "stb_image_resize.h"
 #include "stb_image_write.h"
 
-class ExampleApp : public match3D::Application
+class ExampleApp : public match3D::SimpleApplication
 {
  public:
   ExampleApp() = default;

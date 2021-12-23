@@ -8,13 +8,13 @@
 
 namespace match3D {
 
-struct AppImpl;
+struct SimpleAppImpl;
 
-class Application
+class SimpleApplication
 {
  public:
-  Application();
-  virtual ~Application() = default;
+  SimpleApplication();
+  virtual ~SimpleApplication() = default;
 
   virtual void setup() = 0;
   virtual void buildUI() = 0;
@@ -30,7 +30,9 @@ class Application
  private:
   void mainLoop();
 
-  std::shared_ptr<AppImpl> m_impl{nullptr};
+  std::shared_ptr<SimpleAppImpl> m_impl{nullptr};
 };
+
+using Application = SimpleApplication;
 
 } // namespace match3D

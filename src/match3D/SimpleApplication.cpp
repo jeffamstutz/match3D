@@ -1,7 +1,7 @@
 // Copyright 2021 Jefferson Amstutz
 // SPDX-License-Identifier: Apache-2.0
 
-#include "match3D/detail/Application.h"
+#include "match3D/detail/SimpleApplication.h"
 // glad
 #include "match3D/detail/glad/glad.h"
 // glfw
@@ -22,7 +22,7 @@ static void glfw_error_callback(int error, const char *description)
   fprintf(stderr, "Glfw Error %d: %s\n", error, description);
 }
 
-struct AppImpl
+struct SimpleAppImpl
 {
   GLFWwindow *window{nullptr};
   int width{0};
@@ -37,13 +37,13 @@ struct AppImpl
   void cleanup();
 };
 
-Application::Application()
+SimpleApplication::SimpleApplication()
 {
-  m_impl = std::make_shared<AppImpl>();
+  m_impl = std::make_shared<SimpleAppImpl>();
   glfwSetErrorCallback(glfw_error_callback);
 }
 
-void Application::run(int width, int height, const char *name)
+void SimpleApplication::run(int width, int height, const char *name)
 {
   m_impl->width = width;
   m_impl->height = height;
@@ -56,20 +56,20 @@ void Application::run(int width, int height, const char *name)
   m_impl->cleanup();
 }
 
-bool Application::getWindowSize(int &width, int &height) const
+bool SimpleApplication::getWindowSize(int &width, int &height) const
 {
   width = m_impl->width;
   height = m_impl->height;
   return m_impl->windowResized;
 }
 
-float Application::getLastFrameLatency() const
+float SimpleApplication::getLastFrameLatency() const
 {
   auto diff = m_impl->frameEndTime - m_impl->frameStartTime;
   return std::chrono::duration<float>(diff).count();
 }
 
-void Application::mainLoop()
+void SimpleApplication::mainLoop()
 {
   auto window = m_impl->window;
 
@@ -98,7 +98,7 @@ void Application::mainLoop()
   }
 }
 
-void AppImpl::init()
+void SimpleAppImpl::init()
 {
   if (!glfwInit())
     throw std::runtime_error("failed to initialize GLFW");
@@ -127,14 +127,14 @@ void AppImpl::init()
 
   glfwSetFramebufferSizeCallback(
       window, [](GLFWwindow *w, int newWidth, int newHeight) {
-        auto *app = (AppImpl *)glfwGetWindowUserPointer(w);
+        auto *app = (SimpleAppImpl *)glfwGetWindowUserPointer(w);
         app->width = newWidth;
         app->height = newHeight;
         app->windowResized = true;
       });
 }
 
-void AppImpl::cleanup()
+void SimpleAppImpl::cleanup()
 {
   ImGui_ImplOpenGL2_Shutdown();
   ImGui_ImplGlfw_Shutdown();
