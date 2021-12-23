@@ -20,6 +20,7 @@ class ExampleApp : public match3D::SimpleApplication
   {
     ImGuiIO &io = ImGui::GetIO();
     io.FontGlobalScale = 1.5f;
+    io.IniFilename = nullptr;
   }
 
   void buildUI() override

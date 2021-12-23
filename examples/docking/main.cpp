@@ -24,6 +24,7 @@ class DockingApp : public match3D::DockingApplication
   {
     ImGuiIO &io = ImGui::GetIO();
     io.FontGlobalScale = 1.5f;
+    io.IniFilename = nullptr;
 
     match3D::WindowArray windows;
     windows.emplace_back(new DemoWindow());
