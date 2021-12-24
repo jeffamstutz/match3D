@@ -5,8 +5,8 @@ project(imnodes VERSION ${PROJECT_VERSION} LANGUAGES CXX)
 
 match3D_fetch_project(
   NAME match3D_imnodes_src
-  URL https://github.com/Nelarius/imnodes/archive/refs/tags/v0.4.zip
-  MD5 0681a747526030b0c4f3c4f68f3133b9
+  URL https://github.com/Nelarius/imnodes/archive/e563371cee49eb42da08cca1e0209d30d452c665.zip
+  MD5 b4e87cdd549a759907bbb7cf5176ace8
   DESTINATION match3D_imnodes
 )
 
@@ -25,3 +25,5 @@ target_include_directories(${PROJECT_NAME}
 INTERFACE
   $<BUILD_INTERFACE:${match3D_imnodes_src_LOCATION}>
 )
+
+target_compile_definitions(${PROJECT_NAME} INTERFACE MATCH3D_WITH_IMNODES)

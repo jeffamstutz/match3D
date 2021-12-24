@@ -15,6 +15,8 @@ void Window::renderUI()
   if (!m_visible)
     return;
 
+  ImGui::SetNextWindowSize(ImVec2(550, 680), ImGuiCond_FirstUseEver);
+
   if (m_wrapBeginEnd)
     ImGui::Begin(m_name.c_str(), &m_visible, windowFlags());
 
