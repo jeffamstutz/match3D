@@ -128,19 +128,29 @@ class NodeEditor : public match3D::Window
     const bool openMenu =
         io.KeysDown[GLFW_KEY_A] && io.KeysDown[GLFW_KEY_LEFT_SHIFT];
 
+    static auto mousePos = ImGui::GetMousePos();
+
     if (openMenu && ImNodes::IsEditorHovered()) {
       m_contextMenuVisible = true;
+      mousePos = ImGui::GetMousePos();
       ImGui::OpenPopup("vpContextMenu");
     }
 
     if (ImGui::BeginPopup("vpContextMenu")) {
       if (ImGui::BeginMenu("add node")) {
+        const auto &nodes = m_graph->nodes();
+        const auto numNodes = nodes.size();
+
         if (ImGui::MenuItem("source"))
           m_graph->addNode(make_Node<SourceNode>());
         if (ImGui::MenuItem("compute"))
           m_graph->addNode(make_Node<ComputeNode>());
         if (ImGui::MenuItem("sink"))
           m_graph->addNode(make_Node<SinkNode>());
+
+        if (numNodes != nodes.size())
+          ImNodes::SetNodeScreenSpacePos(nodes.back()->id(), mousePos);
+
         ImGui::EndMenu();
       }
 
