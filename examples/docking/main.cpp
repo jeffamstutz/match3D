@@ -41,6 +41,13 @@ class DockingApp : public match3D::DockingApplication
         if (ImGui::MenuItem("example item 2"))
           printf("example item 2 pressed\n");
 
+        ImGui::Separator();
+
+        if (ImGui::MenuItem("print ImGui ini")) {
+          const char *info = ImGui::SaveIniSettingsToMemory();
+          printf("%s\n", info);
+        }
+
         ImGui::EndMenu();
       }
 
