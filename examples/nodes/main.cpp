@@ -193,8 +193,6 @@ class NodesApp : public match3D::DockingApplication
 
     ImGui::LoadIniSettingsFromMemory(getDefaultUILayout());
 
-    m_graph.addNode(make_Node<SourceNode>());
-
     match3D::WindowArray windows;
     windows.emplace_back(new DemoWindow());
     windows.emplace_back(new NodeEditor(&m_graph));
