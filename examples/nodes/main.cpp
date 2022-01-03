@@ -5,6 +5,8 @@
 // match3D
 #include "match3D/match3D.h"
 
+extern const char *getDefaultUILayout();
+
 // Node types /////////////////////////////////////////////////////////////////
 
 class SourceNode : public Node
@@ -189,6 +191,8 @@ class NodesApp : public match3D::DockingApplication
     io.FontGlobalScale = 1.5f;
     io.IniFilename = nullptr;
 
+    ImGui::LoadIniSettingsFromMemory(getDefaultUILayout());
+
     m_graph.addNode(make_Node<SourceNode>());
 
     match3D::WindowArray windows;
@@ -199,7 +203,18 @@ class NodesApp : public match3D::DockingApplication
 
   void buildMainMenuUI() override
   {
-    // no main menu
+    if (ImGui::BeginMainMenuBar()) {
+      if (ImGui::BeginMenu("File")) {
+        if (ImGui::MenuItem("print ImGui ini")) {
+          const char *info = ImGui::SaveIniSettingsToMemory();
+          printf("%s\n", info);
+        }
+
+        ImGui::EndMenu();
+      }
+
+      ImGui::EndMainMenuBar();
+    }
   }
 
   void teardown() override
