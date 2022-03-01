@@ -1,7 +1,7 @@
 ## Copyright 2021 Jefferson Amstutz
 ## SPDX-License-Identifier: Apache-2.0
 
-project(imgui_glfw VERSION ${PROJECT_VERSION} LANGUAGES CXX)
+project(match3D_imgui_glfw VERSION ${PROJECT_VERSION} LANGUAGES CXX)
 
 match3D_fetch_project(
   NAME match3D_imgui_src

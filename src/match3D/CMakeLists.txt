@@ -7,7 +7,7 @@ target_sources(${PROJECT_NAME} INTERFACE
   DockingApplication.cpp
   Window.cpp
 )
-target_link_libraries(${PROJECT_NAME} INTERFACE imgui_glfw glad)
+target_link_libraries(${PROJECT_NAME} INTERFACE match3D_imgui_glfw match3D_glad)
 target_include_directories(${PROJECT_NAME}
 INTERFACE
   $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>

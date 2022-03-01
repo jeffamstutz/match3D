@@ -8,8 +8,8 @@ match3D_fetch_project(
   DESTINATION match3D_glm
 )
 
-add_library(glm INTERFACE)
-target_include_directories(glm
+add_library(match3D_glm INTERFACE)
+target_include_directories(match3D_glm
 INTERFACE
   $<BUILD_INTERFACE:${match3D_glm_LOCATION}>
 )

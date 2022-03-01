@@ -63,7 +63,7 @@ function(match3D_build_targets)
 
   foreach(COMP ${ARGN})
     match3D_add_component(${COMP})
-    target_link_libraries(match3D INTERFACE ${COMP})
+    target_link_libraries(match3D INTERFACE match3D_${COMP})
   endforeach()
 endfunction()
 

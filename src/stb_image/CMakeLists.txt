@@ -1,7 +1,7 @@
 ## Copyright 2020 The Khronos Group
 ## SPDX-License-Identifier: Apache-2.0
 
-project(stb_image LANGUAGES C)
+project(match3D_stb_image LANGUAGES C)
 add_library(${PROJECT_NAME} INTERFACE)
 target_sources(${PROJECT_NAME}
 INTERFACE

@@ -1,7 +1,7 @@
 ## Copyright 2021 Jefferson Amstutz
 ## SPDX-License-Identifier: Apache-2.0
 
-project(glad VERSION ${PROJECT_VERSION} LANGUAGES C)
+project(match3D_glad VERSION ${PROJECT_VERSION} LANGUAGES C)
 
 add_library(${PROJECT_NAME} INTERFACE)
 target_sources(${PROJECT_NAME}
