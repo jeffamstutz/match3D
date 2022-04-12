@@ -5,8 +5,8 @@ project(match3D_imnodes VERSION ${PROJECT_VERSION} LANGUAGES CXX)
 
 match3D_fetch_project(
   NAME match3D_imnodes_src
-  URL https://github.com/Nelarius/imnodes/archive/e563371cee49eb42da08cca1e0209d30d452c665.zip
-  MD5 b4e87cdd549a759907bbb7cf5176ace8
+  URL https://github.com/Nelarius/imnodes/archive/refs/tags/v0.5.zip
+  MD5 bebc93614fb55fc5924191b3c5320026
   DESTINATION match3D_imnodes
 )
 
