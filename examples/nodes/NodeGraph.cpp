@@ -5,10 +5,12 @@
 // std
 #include <algorithm>
 
-static int g_nextID{0};
+static int g_nextPortID{1000};
+static int g_nextNodeID{1000};
+static int g_nextLinkID{1000};
 
 Port::Port(std::string name, const Node *node)
-    : m_name(name), m_node(node), m_id(g_nextID++)
+    : m_name(name), m_node(node), m_id(g_nextPortID++)
 {}
 
 const char *Port::name() const
@@ -26,7 +28,7 @@ int Port::id() const
   return m_id;
 }
 
-Node::Node(const char *n) : m_name(n), m_id(g_nextID++) {}
+Node::Node(const char *n) : m_name(n), m_id(g_nextNodeID++) {}
 
 const char *Node::name() const
 {
@@ -48,7 +50,7 @@ const InPortArray &Node::incoming() const
   return m_incoming;
 }
 
-Link::Link() : m_id(g_nextID++) {}
+Link::Link() : m_id(g_nextLinkID++) {}
 
 const int Link::id() const
 {

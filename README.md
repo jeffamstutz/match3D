@@ -20,7 +20,7 @@ me know!
 
 The match3D library is consumed as a source library. This is easiest to do
 using CMake via the provided package config. The provided example (found in
-[example/external](example/external)) is built like an external consumer of the
+[examples/simple](examples/simple)) is built like an external consumer of the
 library.
 
 The library is found by pointing your project's build to a local copy of the
@@ -73,7 +73,8 @@ applications must override:
 
 Each of the above methods are pure-virtual (`=0`) so that each customization
 point is always visible in an implementation. The [provided
-example](example/main.cpp) shows a minimal demonstration of an application.
+example](examples/simple/main.cpp) shows a minimal demonstration of an
+application.
 
 NOTE: all mouse and keyboard I/O is to be done through Dear ImGui -- see example
 app to see it in action.
