@@ -4,9 +4,9 @@
 #pragma once
 
 // std
+#include <memory>
 #include <string>
 #include <vector>
-#include <memory>
 
 namespace match3D {
 

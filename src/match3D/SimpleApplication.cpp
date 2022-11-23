@@ -14,6 +14,7 @@
 #include <chrono>
 #include <cstdio>
 #include <stdexcept>
+#include <string>
 
 namespace match3D {
 
