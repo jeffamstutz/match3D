@@ -100,8 +100,8 @@ class NodeEditor : public match3D::Window
     if (ImNodes::IsLinkCreated(&startID, &endID))
       m_graph->addLink(startID, endID);
 
-    const bool doDelete = ImGui::IsKeyReleased(GLFW_KEY_DELETE)
-        || ImGui::IsKeyReleased(GLFW_KEY_X);
+    const bool doDelete = ImGui::IsKeyReleased(ImGuiKey_Delete)
+        || ImGui::IsKeyReleased(ImGuiKey_X);
 
     int numSelected = ImNodes::NumSelectedLinks();
     if (numSelected > 0 && doDelete) {
@@ -128,7 +128,7 @@ class NodeEditor : public match3D::Window
 
     ImGuiIO &io = ImGui::GetIO();
     const bool openMenu =
-        io.KeysDown[GLFW_KEY_A] && io.KeysDown[GLFW_KEY_LEFT_SHIFT];
+        io.KeysDown[ImGuiKey_A] && io.KeysDown[ImGuiKey_LeftShift];
 
     static auto mousePos = ImGui::GetMousePos();
 
