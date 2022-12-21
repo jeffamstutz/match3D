@@ -3,13 +3,13 @@
 
 #include "match3D/detail/DockingApplication.h"
 // glad
-#include "match3D/detail/glad/glad.h"
+#include "match3D/detail/glad/gles2.h"
 // glfw
 #include <GLFW/glfw3.h>
 // imgui
 #define IMGUI_DISABLE_INCLUDE_IMCONFIG_H
 #include "imgui_impl_glfw.h"
-#include "imgui_impl_opengl2.h"
+#include "imgui_impl_opengl3.h"
 // std
 #include <chrono>
 #include <cstdio>
@@ -82,7 +82,7 @@ void DockingApplication::mainLoop()
     m_impl->frameEndTime = std::chrono::steady_clock::now();
     glfwPollEvents();
 
-    ImGui_ImplOpenGL2_NewFrame();
+    ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
 
     ImGui::NewFrame();
@@ -121,7 +121,7 @@ void DockingApplication::mainLoop()
 
     glClearColor(0.1f, 0.1f, 0.1f, 1.f);
     glClear(GL_COLOR_BUFFER_BIT);
-    ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
     glfwSwapBuffers(window);
     m_impl->windowResized = false;
@@ -133,7 +133,12 @@ void DockingAppImpl::init()
   if (!glfwInit())
     throw std::runtime_error("failed to initialize GLFW");
 
+#if 0
   glfwWindowHint(GLFW_SRGB_CAPABLE, GLFW_TRUE);
+#endif
+  glfwWindowHint(GLFW_CONTEXT_CREATION_API, GLFW_EGL_CONTEXT_API);
+  glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_ES_API);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 
   window = glfwCreateWindow(width, height, name.c_str(), nullptr, nullptr);
   if (window == nullptr)
@@ -142,11 +147,10 @@ void DockingAppImpl::init()
   glfwSetWindowUserPointer(window, this);
 
   glfwMakeContextCurrent(window);
-  glfwSwapInterval(1);
 
-  if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+  if (!gladLoadGLES2((GLADloadfunc)glfwGetProcAddress)) {
     glfwTerminate();
-    throw std::runtime_error("Failed to load GL");
+    throw std::runtime_error("Failed to load GLES");
   }
 
   glfwSetFramebufferSizeCallback(
@@ -157,11 +161,13 @@ void DockingAppImpl::init()
         app->windowResized = true;
       });
 
+  glfwSwapInterval(0);
+
   ImGui::CreateContext();
   ImGui::StyleColorsDark();
 
   ImGui_ImplGlfw_InitForOpenGL(window, true);
-  ImGui_ImplOpenGL2_Init();
+  ImGui_ImplOpenGL3_Init();
 
   ImGuiIO &io = ImGui::GetIO();
   io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
@@ -190,7 +196,7 @@ void DockingAppImpl::renderWindows()
 
 void DockingAppImpl::cleanup()
 {
-  ImGui_ImplOpenGL2_Shutdown();
+  ImGui_ImplOpenGL3_Shutdown();
   ImGui_ImplGlfw_Shutdown();
 
   ImGui::DestroyContext();

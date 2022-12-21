@@ -3,13 +3,16 @@
 
 #include "match3D/detail/SimpleApplication.h"
 // glad
-#include "match3D/detail/glad/glad.h"
+#include "match3D/detail/glad/gles2.h"
 // glfw
+#define GLFW_EXPOSE_NATIVE_EGL
+#define GLFW_NATIVE_INCLUDE_NONE
 #include <GLFW/glfw3.h>
+#include <GLFW/glfw3native.h>
 // imgui
 #define IMGUI_DISABLE_INCLUDE_IMCONFIG_H
 #include "imgui_impl_glfw.h"
-#include "imgui_impl_opengl2.h"
+#include "imgui_impl_opengl3.h"
 // std
 #include <chrono>
 #include <cstdio>
@@ -79,7 +82,7 @@ void SimpleApplication::mainLoop()
     m_impl->frameEndTime = std::chrono::steady_clock::now();
     glfwPollEvents();
 
-    ImGui_ImplOpenGL2_NewFrame();
+    ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
 
     ImGui::NewFrame();
@@ -92,7 +95,7 @@ void SimpleApplication::mainLoop()
     ImGui::Render();
 
     drawBackground();
-    ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
     glfwSwapBuffers(window);
     m_impl->windowResized = false;
@@ -104,7 +107,12 @@ void SimpleAppImpl::init()
   if (!glfwInit())
     throw std::runtime_error("failed to initialize GLFW");
 
+#if 0
   glfwWindowHint(GLFW_SRGB_CAPABLE, GLFW_TRUE);
+#endif
+  glfwWindowHint(GLFW_CONTEXT_CREATION_API, GLFW_EGL_CONTEXT_API);
+  glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_ES_API);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 
   window = glfwCreateWindow(width, height, name.c_str(), nullptr, nullptr);
   if (window == nullptr)
@@ -115,16 +123,16 @@ void SimpleAppImpl::init()
   glfwMakeContextCurrent(window);
   glfwSwapInterval(1);
 
-  if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+  if (!gladLoadGLES2((GLADloadfunc)glfwGetProcAddress)) {
     glfwTerminate();
-    throw std::runtime_error("Failed to load GL");
+    throw std::runtime_error("Failed to load GLES");
   }
 
   ImGui::CreateContext();
   ImGui::StyleColorsDark();
 
   ImGui_ImplGlfw_InitForOpenGL(window, true);
-  ImGui_ImplOpenGL2_Init();
+  ImGui_ImplOpenGL3_Init();
 
   glfwSetFramebufferSizeCallback(
       window, [](GLFWwindow *w, int newWidth, int newHeight) {
@@ -137,7 +145,7 @@ void SimpleAppImpl::init()
 
 void SimpleAppImpl::cleanup()
 {
-  ImGui_ImplOpenGL2_Shutdown();
+  ImGui_ImplOpenGL3_Shutdown();
   ImGui_ImplGlfw_Shutdown();
 
   ImGui::DestroyContext();

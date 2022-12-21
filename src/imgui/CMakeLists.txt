@@ -29,11 +29,18 @@ INTERFACE
 
   $<BUILD_INTERFACE:${match3D_imgui_src_LOCATION}/backends/imgui_impl_glfw.cpp>
   $<BUILD_INTERFACE:${match3D_imgui_src_LOCATION}/backends/imgui_impl_opengl2.cpp>
+  $<BUILD_INTERFACE:${match3D_imgui_src_LOCATION}/backends/imgui_impl_opengl3.cpp>
 
   $<BUILD_INTERFACE:${match3D_imgui_src_LOCATION}/misc/cpp/imgui_stdlib.cpp>
 )
 
 target_link_libraries(${PROJECT_NAME} INTERFACE glfw OpenGL::GL)
+
+target_compile_definitions(${PROJECT_NAME}
+INTERFACE
+  IMGUI_IMPL_OPENGL_LOADER_GLAD2
+  IMGUI_IMPL_OPENGL_ES3
+)
 
 target_include_directories(${PROJECT_NAME}
 INTERFACE

@@ -22,7 +22,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <match3D/detail/glad/glad.h>
+#include <match3D/detail/glad/gl.h>
 
 static void* get_proc(const char *namez);
 

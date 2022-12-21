@@ -4,7 +4,7 @@
 #pragma once
 
 // glad
-#include "detail/glad/glad.h"
+#include "detail/glad/gles2.h"
 // glfw
 #include <GLFW/glfw3.h>
 // imgui
