@@ -3,8 +3,8 @@
 
 match3D_fetch_project(
   NAME match3D_nativefiledialog
-  URL https://github.com/btzy/nativefiledialog-extended/archive/refs/heads/master.zip
-  MD5 53a229ad013bba73b2edf22418dc46cd
+  URL https://github.com/btzy/nativefiledialog-extended/archive/refs/tags/v1.0.3.zip
+  MD5 7fd07c47f60a6db4798c705d075e610f
   DESTINATION match3D_nativefiledialog
 )
 
