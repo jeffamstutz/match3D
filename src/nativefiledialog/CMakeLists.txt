@@ -10,7 +10,7 @@ match3D_fetch_project(
 
 add_subdirectory(
   ${match3D_nativefiledialog_LOCATION}
-  ${CMAKE_BINARY_DIR}/match3D/nativefiledialog
+  ${CMAKE_CURRENT_BINARY_DIR}/nativefiledialog
 )
 add_library(match3D_nativefiledialog INTERFACE)
 target_link_libraries(match3D_nativefiledialog INTERFACE nfd)

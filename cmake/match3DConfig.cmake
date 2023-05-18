@@ -46,7 +46,7 @@ function(match3D_add_component COMPONENT)
   if (EXISTS ${COMP_PATH})
     add_subdirectory(
       ${COMP_PATH}
-      ${CMAKE_CURRENT_BINARY_DIR}/match3D/${COMPONENT}
+      ${CMAKE_CURRENT_BINARY_DIR}/match3D_build/${COMPONENT}
     )
   else()
     message(FATAL_ERROR "Unknown match3D component given: ${COMP}")
